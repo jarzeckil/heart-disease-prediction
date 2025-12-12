@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+
+# Environments
+.env
+.venv/
+env/
+.idea
+
+# Poetry
+#poetry.lock
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+models/*
+!models/.gitkeep
+
+data/processed/*
+data/raw/*
+
+!data/processed/.gitkeep
+!data/raw/.gitkeep
