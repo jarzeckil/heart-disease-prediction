@@ -1,8 +1,9 @@
 # Heart Failure Prediction Pipeline 🫀
+[![CI Pipeline](https://github.com/jarzeckil/heart-failure-prediction/actions/workflows/ci.yaml/badge.svg)](https://github.com/jarzeckil/heart-failure-prediction/actions/workflows/ci.yaml)
 
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![Poetry](https://img.shields.io/badge/poetry-1.8-blue)
-![CI](https://github.com/TWOJA_NAZWA_UZYTKOWNIKA/heart-failure-prediction/actions/workflows/ci.yaml/badge.svg)
+
 
 End-to-end Machine Learning pipeline for predicting heart failure risk using standard MLOps practices.
 
