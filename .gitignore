@@ -34,3 +34,7 @@ data/raw/*
 outputs/
 multirun/
 .hydra/
+
+# MLflow
+mlflow.db
+mlruns/
