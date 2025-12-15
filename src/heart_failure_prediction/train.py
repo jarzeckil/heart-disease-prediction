@@ -1,10 +1,8 @@
-import json
 import logging
 import os
 
 import hydra
-from hydra.core.hydra_config import HydraConfig
-import joblib
+import mlflow
 from omegaconf import DictConfig
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -30,6 +28,8 @@ def build_pipeline(cfg: DictConfig) -> Pipeline:
     zero_imputer_columns = list(cfg.processing.missing_vals_cols)
     num_columns = list(cfg.processing.num_features)
     cat_columns = list(cfg.processing.cat_features)
+    num_imp_strategy = cfg.processing.num_impute_strategy
+    cat_imp_strategy = cfg.processing.cat_impute_strategy
 
     full_pipeline = Pipeline(
         [
@@ -45,7 +45,8 @@ def build_pipeline(cfg: DictConfig) -> Pipeline:
                                     (
                                         'median_imputer',
                                         SimpleImputer(
-                                            strategy='median', add_indicator=True
+                                            strategy=num_imp_strategy,
+                                            add_indicator=True,
                                         ),
                                     ),
                                     ('scaler', StandardScaler()),
@@ -59,7 +60,7 @@ def build_pipeline(cfg: DictConfig) -> Pipeline:
                                 [
                                     (
                                         'most_frequent_imputer',
-                                        SimpleImputer(strategy='most_frequent'),
+                                        SimpleImputer(strategy=cat_imp_strategy),
                                     ),
                                     (
                                         'one_hot_encoder',
@@ -124,28 +125,30 @@ def split_data(cfg: DictConfig, df: pd.DataFrame) -> tuple:
     version_base='1.2',
 )
 def main(cfg: DictConfig) -> None:
-    logger.info('----------Reading data----------')
+    mlflow.set_experiment('Heart failure prediction')
+
+    logger.info('Reading data')
     data = load_data(path=cfg.raw_data.path)
-
     X_train, X_test, y_train, y_test = split_data(cfg, data)
-    model = build_pipeline(cfg)
 
-    logger.info('----------Training model----------')
-    model.fit(X_train, y_train)
+    with mlflow.start_run():
+        mlflow.log_params(cfg.modeling)
+        mlflow.log_params(cfg.processing)
 
-    logger.info('----------Evaluating model----------')
-    scores = evaluate(model, X_test, y_test)
+        model = build_pipeline(cfg)
+        model_class_name = model.named_steps['model'].__class__.__name__
+        mlflow.log_param('model_class', model_class_name)
 
-    output_path = HydraConfig.get().runtime.output_dir
+        logger.info('Training model')
+        model.fit(X_train, y_train)
 
-    model_file_path = os.path.join(output_path, 'model.pkl')
-    joblib.dump(model, model_file_path)
-    logger.info(f'Model saved to: {model_file_path}')
+        logger.info('Evaluating model')
+        scores = evaluate(model, X_test, y_test)
+        mlflow.log_metrics(scores)
 
-    scores_file_path = os.path.join(output_path, 'metrics.json')
-    with open(scores_file_path, 'w') as f:
-        json.dump(scores, f, indent=4)
-    logger.info(f'Scores saved to: {scores_file_path}')
+        mlflow.sklearn.log_model(model, name='model')
+
+        logger.info('Run logged to MLflow')
 
 
 if __name__ == '__main__':
