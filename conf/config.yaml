@@ -15,3 +15,5 @@ processing:
   missing_vals_cols: ["Cholesterol", "RestingBP"]  # 0 -> NaN
   cat_features: ["Sex", "ChestPainType", "RestingECG", "ExerciseAngina", "ST_Slope"]
   num_features: ["Age", "RestingBP", "Cholesterol", "FastingBS", "MaxHR", "Oldpeak"]
+  cat_impute_strategy: "most_frequent"
+  num_impute_strategy: "median"
