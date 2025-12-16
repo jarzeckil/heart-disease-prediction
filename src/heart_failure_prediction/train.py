@@ -31,6 +31,8 @@ def build_pipeline(cfg: DictConfig) -> Pipeline:
     num_imp_strategy = cfg.processing.num_impute_strategy
     cat_imp_strategy = cfg.processing.cat_impute_strategy
 
+    hyperparams = cfg.modeling.get('params', {})
+
     full_pipeline = Pipeline(
         [
             (
@@ -75,7 +77,7 @@ def build_pipeline(cfg: DictConfig) -> Pipeline:
                     ]
                 ),
             ),
-            ('model', LogisticRegression()),
+            ('model', LogisticRegression(**hyperparams)),
         ]
     )
 
@@ -124,32 +126,32 @@ def split_data(cfg: DictConfig, df: pd.DataFrame) -> tuple:
     config_name='config',
     version_base='1.2',
 )
-def main(cfg: DictConfig) -> None:
+def main(cfg: DictConfig) -> float:
     mlflow.set_experiment('Heart failure prediction')
 
-    logger.info('Reading data')
-    data = load_data(path=cfg.raw_data.path)
+    data = load_data(path=hydra.utils.to_absolute_path(cfg.raw_data.path))
     X_train, X_test, y_train, y_test = split_data(cfg, data)
 
-    with mlflow.start_run():
+    model = build_pipeline(cfg)
+    model_class_name = model.named_steps['model'].__class__.__name__
+
+    run_name = f'{model_class_name}-C={cfg.modeling.params.get("C", "default")}'
+    with mlflow.start_run(run_name=run_name):
         mlflow.log_params(cfg.modeling)
         mlflow.log_params(cfg.processing)
         mlflow.log_param('n_features', X_train.shape[1])
-
-        model = build_pipeline(cfg)
-        model_class_name = model.named_steps['model'].__class__.__name__
         mlflow.log_param('model_class', model_class_name)
 
-        logger.info('Training model')
         model.fit(X_train, y_train)
 
-        logger.info('Evaluating model')
         scores = evaluate(model, X_test, y_test)
         mlflow.log_metrics(scores)
 
         mlflow.sklearn.log_model(model, name='model')
 
-        logger.info('Run logged to MLflow')
+        logger.info(f'Run {run_name} logged to MLflow')
+
+    return scores['recall']
 
 
 if __name__ == '__main__':

@@ -10,6 +10,9 @@ modeling:
   test_size: 0.2
   random_state: 42
   target: "HeartDisease"
+  params:
+    C: 1.0
+    solver: "lbfgs"
 
 processing:
   missing_vals_cols: ["Cholesterol", "RestingBP"]  # 0 -> NaN
@@ -17,3 +20,20 @@ processing:
   num_features: ["Age", "RestingBP", "Cholesterol", "FastingBS", "MaxHR", "Oldpeak"]
   cat_impute_strategy: "most_frequent"
   num_impute_strategy: "median"
+
+defaults:
+  - override hydra/sweeper: optuna
+
+hydra:
+  sweeper:
+    sampler:
+      seed: 123
+    direction: maximize
+    study_name: heart_failure_optimization
+    storage: null
+    n_trials: 20
+    n_jobs: 1
+
+    params:
+      modeling.params.C: interval(0.001, 10.0)
+      modeling.params.solver: choice("liblinear", "lbfgs")
