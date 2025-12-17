@@ -1,0 +1,10 @@
+model_type: "sklearn"
+test_size: 0.2
+random_state: 42
+target: "HeartDisease"
+
+estimator:
+  _target_: sklearn.linear_model.LogisticRegression
+  C: 1.0
+  solver: "lbfgs"
+  random_state: 42
