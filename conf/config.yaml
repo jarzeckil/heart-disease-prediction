@@ -18,17 +18,3 @@ processing:
   num_features: ["Age", "RestingBP", "Cholesterol", "FastingBS", "MaxHR", "Oldpeak"]
   cat_impute_strategy: "most_frequent"
   num_impute_strategy: "median"
-
-#hydra:
-#  sweeper:
-#    sampler:
-#      seed: 123
-#    direction: maximize
-#    study_name: optimization
-#    storage: null
-#    n_trials: 20
-#    n_jobs: 1
-#
-#    params:
-#      model.estimator.n_estimators: choice(50, 100, 150)
-#      #model.estimator.learning_rate: interval(0.05, 1)
