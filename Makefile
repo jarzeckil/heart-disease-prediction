@@ -27,4 +27,9 @@ init: ## create poetry environment
 
 mlflow-ui: ## run mlflow ui
 	poetry run mlflow ui
-	@echo ">>> Poetry environment created."
+
+train: ## run training
+	poetry run python src/heart_failure_prediction/train.py model=$(model)
+
+train-multirun: ## run training with multirun
+	poetry run python src/heart_failure_prediction/train.py model=$(model) --multirun
