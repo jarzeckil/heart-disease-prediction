@@ -24,3 +24,7 @@ test: ## run tests
 init: ## create poetry environment
 	poetry env use $(PYTHON_VERSION)
 	@echo ">>> Poetry environment created."
+
+mlflow-ui: ## run mlflow ui
+	poetry run mlflow ui
+	@echo ">>> Poetry environment created."
