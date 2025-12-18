@@ -4,7 +4,7 @@ random_state: 42
 target: "HeartDisease"
 
 estimator:
-  _target_: sklearn.ensemble.RandomForestClassifier
+  _target_: sklearn.ensemble.AdaBoostClassifier
   random_state: 42
-  criterion: "log_loss"
+  learning_rate: 1.0
   n_estimators: 50
