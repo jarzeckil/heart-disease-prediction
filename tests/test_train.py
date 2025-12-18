@@ -36,7 +36,7 @@ def dummy_config():
                 'num_impute_strategy': 'median',
                 'cat_impute_strategy': 'most_frequent',
             },
-            'modeling': {
+            'model': {
                 'target': 'target',
                 'test_size': 0.25,
                 'random_state': 42,
