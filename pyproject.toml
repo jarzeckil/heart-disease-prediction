@@ -24,7 +24,9 @@ dependencies = [
     "hydra-optuna-sweeper (>=1.2.0,<2.0.0)",
     "xgboost (>=3.1.2,<4.0.0)",
     "pydantic (>=2.12.5,<3.0.0)",
-    "ty (>=0.0.5,<0.0.6)"
+    "ty (>=0.0.5,<0.0.6)",
+    "uvicorn (>=0.40.0,<0.41.0)",
+    "fastapi (>=0.127.0,<0.128.0)"
 ]
 
 [tool.poetry]
