@@ -21,6 +21,7 @@ env/
 
 models/*
 !models/.gitkeep
+!models/*.dvc
 
 data/processed/*
 data/raw/*

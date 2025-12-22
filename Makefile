@@ -33,3 +33,6 @@ train: ## run training
 
 train-multirun: ## run training with multirun
 	poetry run python src/heart_failure_prediction/train.py model=$(model) --multirun
+
+export-model: ## export latest model from mlflow to joblib
+	poetry run python src/heart_failure_prediction/export_model.py
