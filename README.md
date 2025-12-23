@@ -5,6 +5,7 @@
 ![Python](https://img.shields.io/badge/python-3.1x-blue)
 ![Sklearn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
 ![pytest](https://img.shields.io/badge/py-test-blue?logo=pytest)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker&logoColor=white)
 
 End-to-end Machine Learning pipeline for predicting heart failure risk using standard MLOps practices.
 
@@ -15,19 +16,17 @@ The goal is to classify patients with a high risk of heart failure based on clin
 * **Dependency Management:** Poetry
 * **Data Versioning:** DVC (Data Version Control)
 * **Experiment Tracking:** MLflow
-* **Modeling:** Scikit-learn (Pipelines)
+* **Modeling:** Scikit-learn (Pipelines), XGBoost
 * **API:** FastAPI + Docker
 * **CI/CD:** GitHub Actions (Linting, Testing)
 * **Configuration:** Hydra
 
 ## 🚀 How to Run
 
-### Clone & Setup
 ```bash
 git clone [https://github.com/jarzeckil/heart-failure-prediction.git](https://github.com/jarzeckil/heart-failure-prediction.git)
 cd heart-failure-prediction
-make init
-make install
+docker compose up
 ```
 
 ## 📂 Project Structure
