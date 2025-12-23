@@ -1,0 +1,9 @@
+services:
+  api:
+    build: .
+    image: heart-failure-api:latest
+    container_name: heart-failure-model-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models:z
