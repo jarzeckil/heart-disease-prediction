@@ -35,6 +35,16 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
+@app.get('/health')
+async def health():
+    model = models.get('model')
+
+    if model is None:
+        raise HTTPException(status_code=503, detail='Service unavailable')
+
+    return {'status': 'working'}
+
+
 @app.post('/predict')
 async def predict(record: HeartDiseaseRecord):
     model: Pipeline = models.get('model')
