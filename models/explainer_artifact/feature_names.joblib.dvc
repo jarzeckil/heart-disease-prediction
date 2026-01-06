@@ -1,0 +1,5 @@
+outs:
+- md5: 0edd7af5b15e7f9e5ef365ebb88eaf85
+  size: 882
+  hash: md5
+  path: feature_names.joblib
