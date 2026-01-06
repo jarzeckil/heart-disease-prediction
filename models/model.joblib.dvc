@@ -3,3 +3,4 @@ outs:
   size: 124073
   hash: md5
   path: model.joblib
+  isexec: true
