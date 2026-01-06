@@ -66,7 +66,7 @@ jobs:
           dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
 
       - name: Pull Model from DAGsHub
-        run: dvc pull -v
+        run: dvc pull -r origin
 
       - name: Login to Docker Hub
         if: github.event_name != 'pull_request'
