@@ -39,4 +39,3 @@ multirun/
 # MLflow
 mlflow.db
 mlruns/
-/dvc_test.txt
