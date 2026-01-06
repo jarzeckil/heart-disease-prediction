@@ -20,8 +20,10 @@ env/
 .ipynb_checkpoints
 
 models/*
+models/explainer_artifact/*
 !models/.gitkeep
 !models/*.dvc
+!models/explainer_artifact/*.dvc
 
 data/processed/*
 data/raw/*
