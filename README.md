@@ -58,7 +58,8 @@ docker compose up
 
 The pipeline automates the journey from code commit to production deployment.
 
-```mermaid graph LR
+```mermaid
+graph LR
     A[Code Push] -->|Triggers| B(GitHub Actions)
     B -->|Run Tests| C{Tests Pass?}
     C -- Yes --> D[DVC Pull]
