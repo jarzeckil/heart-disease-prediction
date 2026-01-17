@@ -1,4 +1,4 @@
-# Heart Failure Prediction Pipeline 🫀
+# Heart Disease Prediction Pipeline 🫀
 [![CI Pipeline](https://github.com/jarzeckil/heart-failure-prediction/actions/workflows/ci.yaml/badge.svg)](https://github.com/jarzeckil/heart-failure-prediction/actions/workflows/ci.yaml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/jarzeckil/heart-failure-api)](https://hub.docker.com/r/jarzeckil/heart-failure-api)
 
@@ -10,7 +10,7 @@
 [![DVC](https://img.shields.io/badge/DVC-Enabled-945DD6?logo=dvc&logoColor=white)](https://dvc.org/)
 
 
-End-to-end Machine Learning project for predicting heart failure risk using MLOps practices.
+End-to-end Machine Learning project for predicting heart disease risk using MLOps practices.
 
 <img width="764" height="816" alt="image" src="https://github.com/user-attachments/assets/e5882942-7f54-4667-af10-897585ce85c8" />
 
