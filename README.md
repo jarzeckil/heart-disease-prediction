@@ -3,7 +3,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/jarzeckil/heart-failure-api)](https://hub.docker.com/r/jarzeckil/heart-failure-api)
 
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
-![Python](https://img.shields.io/badge/python-3.1x-blue)
+![Python](https://img.shields.io/badge/python-3.11+-blue)
 ![Sklearn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
 ![pytest](https://img.shields.io/badge/py-test-blue?logo=pytest)
 ![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker&logoColor=white)
