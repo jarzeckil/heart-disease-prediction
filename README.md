@@ -19,6 +19,8 @@ End-to-end Machine Learning project for predicting heart disease risk using MLOp
 Check the model in live action:
 **[hosted with Azure Container Apps](https://heart-predictor.mangoplant-8ee1acf9.polandcentral.azurecontainerapps.io)**
 
+(it scales down to 0, so it might take a minute for the service to load)
+
 
 ## ⭐ Key Features
 
